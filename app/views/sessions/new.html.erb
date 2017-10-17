@@ -1,0 +1,28 @@
+<% content_for :title, "Log in" %>
+<div class="row">
+    <div class="container">
+        <h1>Log in</h1>
+        <%= form_tag do %>
+            <div class="form-group">
+                <%= label_tag(:session_email, "Email") %>
+                <%= email_field(:session, :email, class: "form-control", placeholder: "Enter Email") %>
+            </div>           
+            <div class="form-group">
+                <%= label_tag(:session_password, 'Password') %>
+                <%= password_field(:session, :password, class: "form-control", placeholder: "Enter password") %>
+            </div>
+            <%= submit_tag("Log in", class: 'btn btn-default') %>
+        <% end %>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <% if flash[:login_error] %>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong>
+                <%= flash[:login_error] %>
+            </div>
+        <% end %>
+    </div>
+</div>

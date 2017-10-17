@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="btn-group btn-group-justified">
+	  <a href="#" class="btn btn-primary">Create new message</a>
+	  <a href="#" class="btn btn-primary">List of friends</a>
+	  <a href="#" class="btn btn-primary">List of sent messages</a>
+	</div>
+    <h2>List of messages</h2>
+    <% @messages.each do |message| %>
+        <div class="list-group">
+        	<% if message.status == 0 %>
+        		<a href="#" class="list-group-item list-group-item-danger"><%= message.firstname %> <%= message.lastname %></a>
+        	<% else %>
+        		<a href="#" class="list-group-item active"><%= message.firstname %> <%= message.lastname %></a>
+        	<% end %>
+            <a href="#" class="list-group-item"><%= message.content %></a>
+            <a href="#" class="list-group-item"><%= message.created_at %></a>
+        </div>
+       <% end %>
+</div>
