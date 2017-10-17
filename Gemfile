@@ -31,7 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
+#Use composite_primary_keys
+gem 'composite_primary_keys', '~> 10.0', '>= 10.0.1'
 #Use Faker to create random data
 gem 'faker'
 

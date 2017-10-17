@@ -2,6 +2,7 @@ require 'bcrypt'
 
 class User < ApplicationRecord
 	has_many :messages
+	has_many :friends
 
 	include BCrypt
 
