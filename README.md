@@ -1,6 +1,6 @@
-# BT-TMDT-2 - InstaMes
+﻿# BT-TMDT-2 - PHULAM
 
-InstaMes là một bài tập môn TMDT. Ứng dụng cho phép người dùng gửi tin nhắn (email) cho người dùng khác.
+PHULAM là một bài tập môn TMDT. Ứng dụng cho phép người dùng gửi tin nhắn (email) cho người dùng khác.
 
 Thành viên:
 * [x] 1412278 Phan Khánh Lâm (tên tài khoản github: 1412278)
