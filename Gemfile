@@ -35,7 +35,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'composite_primary_keys', '~> 10.0', '>= 10.0.1'
 #Use Faker to create random data
 gem 'faker'
-
+#Use font-awesome
+gem 'font-awesome-sass'
+#Use byebug
+gem 'byebug'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
