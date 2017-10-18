@@ -8,12 +8,33 @@
     <% @messages.each do |message| %>
         <div class="list-group">
         	<% if message.status == 0 %>
-        		<a href="#" class="list-group-item list-group-item-danger"><%= message.firstname %> <%= message.lastname %></a>
+        		<a class="list-group-item list-group-item-danger" id="list_group_<%= message.id %>"><%= message.firstname %> <%= message.lastname %>
+                    <button type="button" class="btn" id="<%= message.id %>" style="background-color: transparent;">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    </button>
+                </a>
         	<% else %>
-        		<a href="#" class="list-group-item active"><%= message.firstname %> <%= message.lastname %></a>
+        		<a class="list-group-item active"><%= message.firstname %> <%= message.lastname %></a>
         	<% end %>
-            <a href="#" class="list-group-item"><%= message.content %></a>
-            <a href="#" class="list-group-item"><%= message.created_at %></a>
+            <a class="list-group-item"><%= message.content %></a>
+            <a class="list-group-item"><%= message.created_at %></a>
         </div>
-       <% end %>
+    <% end %>
 </div>
+<script type="text/javascript">
+    <% @messages.each do |message| %>
+        $("#<%= message.id %>").click(function() {
+            $.get("<%= edit_message_path(message.id) %>", function(result) {
+                console.log(result);
+
+                if (result) {
+                    alert(result);
+                }
+                else {
+                    $("#list_group_<%= message.id %>").removeClass('list-group-item-danger').addClass('active');
+                    $("#list_group_<%= message.id %>").children().remove();
+                }
+            });
+        });
+    <% end %>
+</script>
