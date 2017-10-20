@@ -36,8 +36,8 @@ class SessionsController < ApplicationController
 				session[:id_current_user] = user["id"];
 
 				redirect_to messages_path
-			rescue
-				flash[:login_error] = "Failed!!!"
+			rescue Exception => ex
+				flash[:login_error] = "An error of type #{ex.class} happened, message is #{ex.message}"
 
 				render :new
 			end
