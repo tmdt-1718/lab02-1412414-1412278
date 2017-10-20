@@ -9,10 +9,10 @@ Message.delete_all
 Friend.delete_all
 User.delete_all
 
-User.create!(id: 1, firstname: 'Linh', lastname: 'Thi', phonenumber: Faker::PhoneNumber.phone_number, email: 'thiduclinh@gmail.com', password_hash: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
-User.create!(id: 2, firstname: 'Kim', lastname: 'Vuong', phonenumber: Faker::PhoneNumber.phone_number, email: 'vuongngockim@gmail.com', password_hash: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
-User.create!(id: 3, firstname: 'Hung', lastname: 'Banh', phonenumber: Faker::PhoneNumber.phone_number, email: 'banhvihung@gmail.com', password_hash: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
-User.create!(id: 4, firstname: 'Nhi', lastname: 'Huynh', phonenumber: Faker::PhoneNumber.phone_number, email: 'huynhhoannhi@gmail.com', password_hash: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
+User.create!(id: 1, first_name: 'Linh', last_name: 'Thi', phone_number: Faker::PhoneNumber.phone_number, email: 'thiduclinh@gmail.com', password_digest: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
+User.create!(id: 2, first_name: 'Kim', last_name: 'Vuong', phone_number: Faker::PhoneNumber.phone_number, email: 'vuongngockim@gmail.com', password_digest: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
+User.create!(id: 3, first_name: 'Hung', last_name: 'Banh', phone_number: Faker::PhoneNumber.phone_number, email: 'banhvihung@gmail.com', password_digest: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
+User.create!(id: 4, first_name: 'Nhi', last_name: 'Huynh', phone_number: Faker::PhoneNumber.phone_number, email: 'huynhhoannhi@gmail.com', password_digest: '$2a$10$bJY1NOd4/zHuuEiQaDr3L.sz1/k5DrDf5RfVUJFxYtcdRVt9Y/ZSO')
 
 Friend.create!(friend_id: 1, user_id: 2)
 Friend.create!(friend_id: 2, user_id: 1)

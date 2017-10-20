@@ -17,8 +17,8 @@
                 <ul class="nav navbar-nav">
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <% if session[:firstname_current_user] && session[:lastname_current_user] %>
-                        <li><a>Hello, <%= session[:firstname_current_user] %> <%= session[:lastname_current_user] %></a></li>
+                    <% if session[:first_name_current_user] && session[:last_name_current_user] %>
+                        <li><a>Hello, <%= session[:first_name_current_user] %> <%= session[:last_name_current_user] %></a></li>
                         <li><a href="<%= logout_path %>" data-method="delete"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
                     <% else %>
                         <li><a href="<%= new_user_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

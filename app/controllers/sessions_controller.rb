@@ -7,30 +7,58 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		@user = User.find_by(session_email_params)
+		if params[:session].present?
+			user = User.find_by(session_email_params)
+		
+			if user.nil?
+				flash[:login_error] = "Wrong email!!!"
 
-		if @user.nil?
-			flash[:login_error] = "Wrong email!!!"
-			render :new
-		else 
-			if @user.password == session_password_params
-		    	session[:firstname_current_user] = @user["firstname"];
-				session[:lastname_current_user] = @user["lastname"];
-				session[:id_current_user] = @user["id"];
-				redirect_to messages_path
-		  	else
-		    	flash[:login_error] = "Wrong password!!!"
 				render :new
-		  	end
-		end		
+			else 
+				if user.authenticate(session_password_params)	
+				    session[:first_name_current_user] = user["first_name"];
+					session[:last_name_current_user] = user["last_name"];
+					session[:id_current_user] = user["id"];
+
+					redirect_to messages_path
+				else
+					flash[:login_error] = "Wrong password!!!"
+
+					render :new
+				end
+			end		
+		else
+			begin
+				user = User.from_omniauth(auth_hash)
+
+				session[:first_name_current_user] = user["first_name"];
+				session[:last_name_current_user] = user["last_name"];
+				session[:id_current_user] = user["id"];
+
+				redirect_to messages_path
+			rescue Exception => ex
+				flash[:login_error] = "An error of type #{ex.class} happened, message is #{ex.message}"
+
+				render :new
+			end
+		end
 	end
 
 	def destroy
-		session.delete(:firstname_current_user)
-		session.delete(:lastname_current_user)
+		session.delete(:first_name_current_user)
+		session.delete(:last_name_current_user)
 		session.delete(:id_current_user)
 
 		redirect_to login_path
+	end
+
+	def failure
+		render :new
+	end
+
+	protected
+	def auth_hash
+	    request.env['omniauth.auth']
 	end
 
 	private
@@ -44,7 +72,7 @@ class SessionsController < ApplicationController
 	end
 
 	def authenticate
-		if session[:id_current_user] && session[:firstname_current_user] && session[:lastname_current_user]
+		if session[:id_current_user] && session[:first_name_current_user] && session[:last_name_current_user]
 			redirect_to messages_path
 		end
 	end
