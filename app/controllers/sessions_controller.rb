@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
 
 				session[:first_name_current_user] = user["first_name"];
 				session[:last_name_current_user] = user["last_name"];
-				session[:id_current_user] = @user["id"];
+				session[:id_current_user] = user["id"];
 
 				redirect_to messages_path
 			rescue
