@@ -28,13 +28,19 @@ class SessionsController < ApplicationController
 				end
 			end		
 		else
-			@user = User.find_or_create_from_auth_hash(auth_hash)
+			begin
+				user = User.from_omniauth(auth_hash)
 
-			session[:first_name_current_user] = @user["first_name"];
-			session[:last_name_current_user] = @user["last_name"];
-			session[:id_current_user] = @user["id"];
+				session[:first_name_current_user] = user["first_name"];
+				session[:last_name_current_user] = user["last_name"];
+				session[:id_current_user] = @user["id"];
 
-			redirect_to messages_path
+				redirect_to messages_path
+			rescue
+				flash[:login_error] = "Wrong password!!!"
+
+				render :new
+			end
 		end
 	end
 
