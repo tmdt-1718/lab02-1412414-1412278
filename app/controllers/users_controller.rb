@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 			max_id += 1
 
 			@user["id"] = max_id
+			@user.password = user_password_params;
 
 			if @user.save
 				redirect_to login_path
@@ -32,6 +33,11 @@ class UsersController < ApplicationController
 	private
 	def user_email_params
 		params.require(:user).permit(:email)
+	end
+
+	private
+	def user_password_params	
+		params.require(:user).permit(:password)
 	end
 
 	private
