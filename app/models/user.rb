@@ -10,7 +10,7 @@ class User < ApplicationRecord
 		user.last_name = auth_hash['info']['last_name']
 		user.email = auth_hash['info']['email']
 		user.password = '123456'
-		user.id = User.maximum("id") + 1
+		user.id = maximum("id") + 1
 
 		user.save!
 		user
