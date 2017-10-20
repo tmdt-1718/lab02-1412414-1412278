@@ -28,17 +28,11 @@ class SessionsController < ApplicationController
 				end
 			end		
 		else
-			begin
-				user = User.from_omniauth(request.env['omniauth.auth'])
+			@user = User.find_or_create_from_auth_hash(auth_hash)
 
-				session[:first_name_current_user] = user["first_name"];
-				session[:last_name_current_user] = user["last_name"];
-				session[:id_current_user] = user["id"];
-			rescue
-				flash[:login_error] = "Failed!!!"
-
-				render :new
-			end
+			session[:first_name_current_user] = @user["first_name"];
+			session[:last_name_current_user] = @user["last_name"];
+			session[:id_current_user] = @user["id"];
 
 			redirect_to messages_path
 		end
@@ -54,6 +48,11 @@ class SessionsController < ApplicationController
 
 	def failure
 		render :new
+	end
+
+	protected
+	def auth_hash
+	    request.env['omniauth.auth']
 	end
 
 	private
