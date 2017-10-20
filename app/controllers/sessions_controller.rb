@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
 
 				redirect_to messages_path
 			rescue
-				flash[:login_error] = "Wrong password!!!"
+				flash[:login_error] = "Failed!!!"
 
 				render :new
 			end
