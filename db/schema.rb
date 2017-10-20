@@ -37,10 +37,12 @@ ActiveRecord::Schema.define(version: 20171017140812) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "password_hash"
-    t.string "firstname"
-    t.string "lastname"
-    t.string "phonenumber"
+    t.string "password_digest"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "uid"
+    t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

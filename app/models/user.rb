@@ -1,17 +1,17 @@
-require 'bcrypt'
-
 class User < ApplicationRecord
 	has_many :messages
 	has_many :friends
 
-	include BCrypt
+	has_secure_password
 
-  def password
-    @password ||= Password.new(self.password_hash)
-  end
+	def self.from_omniauth(auth_hash)
+		user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
+		user.first_name = auth_hash['info']['first_name']
+		user.last_name = auth_hash['info']['last_name']
+		user.email = auth_hash['info']['email']
+		user.password = '123456'
 
-  def password=(new_password)
-    @password = Password.create(new_password)
-    self.password_hash = @password
-  end
+		user.save!
+		user
+	end
 end

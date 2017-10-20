@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
 	def index
-		@messages = Message.joins(:user).select('messages.*, users.firstname, users.lastname').where(:messages => {:receiver_id => session[:id_current_user]}).order(created_at: :desc)
+		@messages = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:receiver_id => session[:id_current_user]}).order(created_at: :desc)
 	end
 
 	def new

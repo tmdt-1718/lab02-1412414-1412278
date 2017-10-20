@@ -20,7 +20,9 @@ gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+# Facebook authentication
+gem 'omniauth'
+gem 'omniauth-facebook' 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -31,13 +33,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-#Use composite_primary_keys
+# Use composite_primary_keys
 gem 'composite_primary_keys', '~> 10.0', '>= 10.0.1'
-#Use Faker to create random data
+# Use Faker to create random data
 gem 'faker'
-#Use font-awesome
+# Use font-awesome
 gem 'font-awesome-sass'
-#Use byebug
+# Use byebug
 gem 'byebug'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
