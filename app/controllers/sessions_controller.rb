@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
 	def create
 		if params[:session].present?
-			user = User.find_by(session_email_params)
+			user = User.find_by_email(session_email_params)
 		
 			if user.nil?
 				flash[:login_error] = "Wrong email!!!"
