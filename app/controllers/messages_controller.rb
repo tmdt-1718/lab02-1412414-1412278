@@ -2,7 +2,12 @@ class MessagesController < ApplicationController
 	before_action :authenticate, only: [:new, :index]
 
 	def index
-		@messages = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:receiver_id => session[:id_current_user]}).order(created_at: :desc)
+		@messages = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:receiver_id => session[:id_current_user]}).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+
+		respond_to do |format|
+		  format.html
+		  format.js
+		end
 	end
 
 	def new
