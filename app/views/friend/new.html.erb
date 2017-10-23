@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="list-group">
+    <a class= "list-group-item">
+      <h2> USER LIST </h2>
+    </a>
+    <% @list.each do |user|%>
+        <% if user.id == session["id_current_user"]%>
+            <a class="list-group-item list-group-item-danger">
+           <%= user.first_name %> <%= user.last_name %> Email:  <%= user.email %>
+          </a>
+          <% else %>
+            <% @friendlist.each do |friend| %>
+                  <% if friend.email == user.email %>
+                    <a class="list-group-item list-group-item-active">
+                      <%= user.first_name %>   <%= user.last_name %> Email:  <%= user.email %>
+                      <button type="button" class="btn btn-primary">Friend </button>
+                   </a>
+                   <%else%>
+                   <a class="list-group-item list-group-item-active">
+                         <%= user.first_name %>   <%= user.last_name %> <%= user.email %>
+                         <button type="button" class="btn-info" id="<%= user.id %>">
+                            Add friend
+                         </button>
+                   </a>
+                   <%end%>
+             <%end%>
+          <%end%>
+     <%end%>
+  </div>
+</div>
