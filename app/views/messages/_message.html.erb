@@ -16,6 +16,11 @@
     <a class="list-group-item">
         <%= message.content %>
     </a>
+    <% if message.image_file_name %>
+        <a class="list-group-item">
+            <%= image_tag message.image.url %>
+        </a>
+    <% end %>
     <a class="list-group-item">
         <%= message.created_at %>
     </a>

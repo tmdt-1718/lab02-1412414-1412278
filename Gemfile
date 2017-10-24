@@ -46,6 +46,8 @@ gem 'byebug'
 # Use will_paginate
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+# Use paperclip
+gem "paperclip"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
