@@ -15,26 +15,40 @@ class MessagesController < ApplicationController
 	end
 
 	def create
-		message = Message.new
-
-		max_id = Message.maximum("id")
-		max_id += 1
-
-		message.id = max_id
-		message.receiver_id = params[:message][:receiver_id].to_i
-		message.content = params[:message][:content]
-		message.user_id = session["id_current_user"]
-		message.status = 0;
+		error = 0
 
 		begin
-			message.save!
+			receivers = params[:receivers]
 
-			flash[:success_create_message] = "Sent successfully to #{params[:message][:receiver_id].to_i}!!!"
-			redirect_to messages_path
+			receivers.each do |id|
+				message = Message.new
+
+				max_id = Message.maximum("id")
+				max_id += 1
+
+				message.id = max_id
+				message.receiver_id = id
+				message.content = params[:content]
+				message.user_id = session["id_current_user"]
+				message.status = 0;
+
+				begin
+					message.save!		
+				rescue Exception => ex
+					error += 1
+					flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}"
+				end
+			end
 		rescue Exception => ex
+			error += 1
 			flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}"
-			redirect_to messages_path
 		end
+		
+		if error == 0
+			flash[:success_create_message] = "Sent successfully!!!"
+		end
+			
+		redirect_to messages_path
 	end
 
 	def edit
