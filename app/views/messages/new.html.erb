@@ -11,32 +11,53 @@
         	<% end %>
         </ul>
     </div>
+    <div class="panel panel-default">
+      <div class="panel-body"></div>
+    </div>
     <%= form_for Message.new do |f| %>
         <div class="form-group">
-        	<%= f.label :receiver_id, "Receiver_id" %>
-            <%= f.text_field :receiver_id, class: "form-control", id: "receiver_id" %>
             <%= f.label :content, "Content" %>
             <%= f.text_area :content, class: "form-control", placeholder: "Enter your message content", size: "24x20" %>
         </div>
-        <%= f.submit "Send", class: 'btn btn-default', disabled: true, id: "submit_button" %>
+        <button type="button" class="btn btn-default" disabled id="submit_button">Send</button>
     <% end %>
 </div>
 <script type="text/javascript">
+    var receivers = [];
+
 	<% if @friends.present? %>
         <% @friends.each do |friend| %>
         	$("#friend_<%= friend.friend_id %>").click(function() {
-        		friend_name = $("#friend_<%= friend.friend_id %>").text();	
-        		friend_dropdown_toggle_text = friend_name + " <span class=\"caret\"></span>"
-        		friend_id = <%= friend.friend_id %>;
+        		var friend_name = $("#friend_<%= friend.friend_id %>").text();	
+        		var friend_dropdown_toggle_text = friend_name + " <span class=\"caret\"></span>"
+        		var friend_id = <%= friend.friend_id %>;
 
         		console.log(friend_name);
 
         		$(".btn.btn-primary.dropdown-toggle").html(friend_dropdown_toggle_text);
-
         		$("#submit_button").prop('disabled', false);
+                $(".panel-body").append("<span class=\"badge\">" + friend_name + "</span>");
+                $("#friend_<%= friend.friend_id %>").hide();
 
-        		$("#receiver_id").val(friend_id);
+                receivers.push(friend_id);
+
+                console.log(receivers);
         	});
         <% end %>
     <% end %>
+
+    $("#submit_button").click(function() {
+        console.log("submit_button clicked!!!");
+
+        var data = {
+            receivers: receivers,
+            content: $("#message_content").val()
+        }
+
+        console.log(data);
+
+        $.post("<%= messages_path %>", data, function() {
+
+        });
+    })
 </script>
