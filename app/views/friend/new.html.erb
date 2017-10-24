@@ -5,7 +5,7 @@
     </a>
     <% @list.each do |user|%>
         <% if user.id == session["id_current_user"]%>
-            <a class="list-group-item list-group-item-danger">
+            <a class="list-group-item list-group-item-danger" >
            <%= user.first_name %> <%= user.last_name %> Email:  <%= user.email %>
           </a>
           <% else %>
@@ -17,7 +17,7 @@
                    </a>
                    <%else%>
                    <a class="list-group-item list-group-item-active">
-                         <%= user.first_name %>   <%= user.last_name %> <%= user.email %>
+                         <%= user.first_name %> <%= user.last_name %> <%= user.email %>
                          <button type="button" class="btn-info" id="<%= user.id %>">
                             Add friend
                          </button>
@@ -27,4 +27,22 @@
           <%end%>
      <%end%>
   </div>
+  <script type="text/javascript">
+  var friend_id = <%= user.id %>
+      <% @list.each do |user| %>
+          $("#<%= message.id %>").click(function() {
+              $.push("<%= new_friend_path(user.id) %>", function(result) {
+                  console.log(result);
+
+                  if (result) {
+                      alert(result);
+                  }
+                  else {
+                      $("#list_group_<%= message.id %>").removeClass('list-group-item-danger').addClass('active');
+                      $("#list_group_<%= message.id %>").children().remove();
+                  }
+              });
+          });
+      <% end %>
+
 </div>

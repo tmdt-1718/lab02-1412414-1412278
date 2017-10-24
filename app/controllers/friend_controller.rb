@@ -9,12 +9,12 @@ class FriendController < ApplicationController
   end
 
   def create
-    @friend = Friend.new(friend_param)
+    @friend = Friend.new(:user_id =>session[:id_current_user],:friend_id => user_id )
 
     if @friend.save
-      redirect_to friend_path(session.id_current_user)
+      render json: nil
     else
-      render :new
+    render json: "There has been an error occured"
     end
   end
 
