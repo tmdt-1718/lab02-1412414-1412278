@@ -5,3 +5,20 @@ $('#my-messages').append('<%= j render @messages %>');
   $(window).off('scroll');
   $('.pagination').remove();
 <% end %>
+
+<% if @messages.present? %>
+    <% @messages.each do |message| %>
+        $("#<%= message.id %>").click(function() {
+            $.get("<%= edit_message_path(message.id) %>", function(result) {
+                console.log(result);
+
+                if (result) {
+                    alert(result);
+                } else {
+                    $("#list_group_<%= message.id %>").removeClass('list-group-item-danger').addClass('active');
+                    $("#list_group_<%= message.id %>").children().remove();
+                }
+            });
+        });
+    <% end %>
+<% end %>
