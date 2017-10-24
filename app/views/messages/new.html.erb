@@ -1,0 +1,49 @@
+<% content_for :title, "New messages" %>
+<div class="container">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">List of friends
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+        	<% if @friends.present? %>
+        		<% @friends.each do |friend| %>
+        		    <li><a id="friend_<%= friend.friend_id %>"><%= friend.first_name %> <%= friend.last_name %></a></li>
+        		<% end %>
+        	<% end %>
+        </ul>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body"></div>
+    </div>
+    <%= form_for Message.new do |f| %>
+        <div class="form-group">
+            <%= f.label :image, "Image" %>
+            <%= f.file_field :image, class: "form-control", accept: 'image/png,image/gif,image/jpeg' %>
+            <%= f.label :content, "Content" %>
+            <%= f.text_area :content, class: "form-control", placeholder: "Enter your message content", size: "24x15" %>
+        </div>   
+        <%= f.submit "Send", class: 'btn btn-default', disabled: true, id: "submit_button" %>
+    <% end %>
+</div>
+<script type="text/javascript">
+    var num = 0;
+
+	<% if @friends.present? %>
+        <% @friends.each do |friend| %>
+        	$("#friend_<%= friend.friend_id %>").click(function() {
+        		var friend_name = $("#friend_<%= friend.friend_id %>").text();	
+        		var friend_dropdown_toggle_text = friend_name + " <span class=\"caret\"></span>"
+        		var friend_id = <%= friend.friend_id %>;
+
+        		console.log(friend_name);
+
+        		$(".btn.btn-primary.dropdown-toggle").html(friend_dropdown_toggle_text);
+        		$("#submit_button").prop('disabled', false);
+                $(".panel-body").append("<span class=\"badge\">" + friend_name + "</span>");
+                $("#friend_<%= friend.friend_id %>").hide();
+
+                $("#new_message").append("<input type=\"hidden\" name=\"message[ids][]\" value=\"" + friend_id + "\" />");
+                num++;
+        	});
+        <% end %>
+    <% end %>
+</script>
