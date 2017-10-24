@@ -2,53 +2,15 @@ class MessagesController < ApplicationController
 	before_action :authenticate, only: [:new, :index]
 
 	def index
-			@messages = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:receiver_id => session[:id_current_user]}).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
-
-		respond_to do |format|
-		  format.html
-		  format.js
-		end
+		@messages = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:receiver_id => session[:id_current_user]}).order(created_at: :desc)
 	end
-
+	def sent
+		@sent = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:user_id => session[:id_current_user]}).order(created_at: :desc)
+	end
 	def new
-		@friends = Friend.joins("left join users on friends.friend_id = users.id").select('friends.user_id, friends.friend_id, users.first_name, users.last_name').where(:friends => {:user_id => session[:id_current_user]})
 	end
 
 	def create
-		error = 0
-
-		begin
-			receivers = params[:receivers]
-
-			receivers.each do |id|
-				message = Message.new
-
-				max_id = Message.maximum("id")
-				max_id += 1
-
-				message.id = max_id
-				message.receiver_id = id
-				message.content = params[:content]
-				message.user_id = session["id_current_user"]
-				message.status = 0;
-
-				begin
-					message.save!		
-				rescue Exception => ex
-					error += 1
-					flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}"
-				end
-			end
-		rescue Exception => ex
-			error += 1
-			flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}"
-		end
-		
-		if error == 0
-			flash[:success_create_message] = "Sent successfully!!!"
-		end
-			
-		redirect_to messages_path
 	end
 
 	def edit
@@ -56,7 +18,7 @@ class MessagesController < ApplicationController
 
 		if result == 1
 			render json: nil
-		else 
+		else
 			render json: "There has been an error occured"
 		end
 	end
