@@ -16,14 +16,16 @@
     </div>
     <%= form_for Message.new do |f| %>
         <div class="form-group">
+            <%= f.label :image, "Image" %>
+            <%= f.file_field :image, class: "form-control", accept: 'image/png,image/gif,image/jpeg' %>
             <%= f.label :content, "Content" %>
-            <%= f.text_area :content, class: "form-control", placeholder: "Enter your message content", size: "24x20" %>
-        </div>
-        <button type="button" class="btn btn-default" disabled id="submit_button">Send</button>
+            <%= f.text_area :content, class: "form-control", placeholder: "Enter your message content", size: "24x15" %>
+        </div>   
+        <%= f.submit "Send", class: 'btn btn-default', disabled: true, id: "submit_button" %>
     <% end %>
 </div>
 <script type="text/javascript">
-    var receivers = [];
+    var num = 0;
 
 	<% if @friends.present? %>
         <% @friends.each do |friend| %>
@@ -39,25 +41,9 @@
                 $(".panel-body").append("<span class=\"badge\">" + friend_name + "</span>");
                 $("#friend_<%= friend.friend_id %>").hide();
 
-                receivers.push(friend_id);
-
-                console.log(receivers);
+                $("#new_message").append("<input type=\"hidden\" name=\"message[ids][]\" value=\"" + friend_id + "\" />");
+                num++;
         	});
         <% end %>
     <% end %>
-
-    $("#submit_button").click(function() {
-        console.log("submit_button clicked!!!");
-
-        var data = {
-            receivers: receivers,
-            content: $("#message_content").val()
-        }
-
-        console.log(data);
-
-        $.post("<%= messages_path %>", data, function() {
-
-        });
-    })
 </script>

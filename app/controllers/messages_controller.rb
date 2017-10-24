@@ -18,17 +18,16 @@ class MessagesController < ApplicationController
 		error = 0
 
 		begin
-			receivers = params[:receivers]
+			receivers = params[:message][:ids]
 
-			receivers.each do |id|
-				message = Message.new
+			receivers.each do |receiver|
+				message = Message.new(message_params)
 
 				max_id = Message.maximum("id")
 				max_id += 1
 
 				message.id = max_id
-				message.receiver_id = id
-				message.content = params[:content]
+				message.receiver_id = receiver
 				message.user_id = session["id_current_user"]
 				message.status = 0;
 
@@ -36,19 +35,23 @@ class MessagesController < ApplicationController
 					message.save!		
 				rescue Exception => ex
 					error += 1
-					flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}"
+					flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}, #{receivers}"
 				end
 			end
 		rescue Exception => ex
 			error += 1
-			flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}"
+			flash[:error_create_message] = "An error of type #{ex.class} happened, message is #{ex.message}, #{receivers}"
 		end
 		
 		if error == 0
-			flash[:success_create_message] = "Sent successfully!!!"
+			flash[:success_create_message] = "Sent successfully!!!, #{receivers}"
 		end
 			
 		redirect_to messages_path
+	end
+
+	def message_params
+		params.require(:message).permit(:image, :content)
 	end
 
 	def edit

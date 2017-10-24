@@ -27,7 +27,7 @@ Yêu cầu **bắt buộc**
 * [ ] Người dùng chỉ có thể đọc tin nhắn khi họ nằm trong danh sách người nhận. (**MSSV**)
 
 Yêu cầu **không bắt buộc**:
-* [ ] Người dùng có thể gửi hình ảnh đính kèm theo thông điệp. (**MSSV**)
+* [x] Người dùng có thể gửi hình ảnh đính kèm theo thông điệp. (**1412414**)
 * [x] Người dùng có thể gửi tin nhắn đến nhiều người dùng cùng lúc. (**1412414**)
 * [x] Người dùng có thể đăng nhập với Facebook. (**1412414**)
 * [ ] Người dùng có thể block người khác. Sau khi block, người dùng sẽ không nhận được tin nhắn từ người bị block gửi nữa. (**MSSV**)
