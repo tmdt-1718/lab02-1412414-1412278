@@ -1,0 +1,17 @@
+<% content_for :title, "Messages" %>
+<div class="container">
+
+    <h2>List of Sent messages</h2>
+    <div class="list_group">
+    <% if @sent.present? %>
+      <% @sent.each do |sent_mess| %>
+        <a class="list_group_item_active">
+          Receiver: <%= sent_mess.first_name%>  <%= sent_mess.last_name %>
+        </a>
+        <a class="list_group_item_danger">
+          Content <%= sent_mess.content%>  
+        </a>
+      <%end%>
+    <% end %>
+  </div>
+</div>
