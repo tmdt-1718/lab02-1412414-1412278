@@ -1,0 +1,42 @@
+<% content_for :title, "New messages" %>
+<div class="container">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">List of friends
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+        	<% if @friends.present? %>
+        		<% @friends.each do |friend| %>
+        		    <li><a id="friend_<%= friend.friend_id %>"><%= friend.first_name %> <%= friend.last_name %></a></li>
+        		<% end %>
+        	<% end %>
+        </ul>
+    </div>
+    <%= form_for Message.new do |f| %>
+        <div class="form-group">
+        	<%= f.label :receiver_id, "Receiver_id" %>
+            <%= f.text_field :receiver_id, class: "form-control", id: "receiver_id" %>
+            <%= f.label :content, "Content" %>
+            <%= f.text_area :content, class: "form-control", placeholder: "Enter your message content", size: "24x20" %>
+        </div>
+        <%= f.submit "Send", class: 'btn btn-default', disabled: true, id: "submit_button" %>
+    <% end %>
+</div>
+<script type="text/javascript">
+	<% if @friends.present? %>
+        <% @friends.each do |friend| %>
+        	$("#friend_<%= friend.friend_id %>").click(function() {
+        		friend_name = $("#friend_<%= friend.friend_id %>").text();	
+        		friend_dropdown_toggle_text = friend_name + " <span class=\"caret\"></span>"
+        		friend_id = <%= friend.friend_id %>;
+
+        		console.log(friend_name);
+
+        		$(".btn.btn-primary.dropdown-toggle").html(friend_dropdown_toggle_text);
+
+        		$("#submit_button").prop('disabled', false);
+
+        		$("#receiver_id").val(friend_id);
+        	});
+        <% end %>
+    <% end %>
+</script>

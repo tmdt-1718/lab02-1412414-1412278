@@ -1,6 +1,17 @@
+<% content_for :title, "Messages" %>
 <div class="container">
+    <% if flash[:error_create_message] %>
+        <div class="alert alert-danger alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong><%= flash[:error_create_message] %>
+        </div>
+    <% end %>
+    <% if flash[:success_create_message] %>
+        <div class="alert alert-success alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong><%= flash[:success_create_message] %>
+        </div>
+    <% end %>
 	<div class="btn-group btn-group-justified">
-	  <a href="#" class="btn btn-primary">Create new message</a>
+	  <a href="<%= new_message_path %>" class="btn btn-primary">Create new message</a>
 	  <a href="#" class="btn btn-primary">List of friends</a>
 	  <a href="#" class="btn btn-primary">List of sent messages</a>
 	</div>
@@ -15,19 +26,20 @@
     <% end %>
 </div>
 <script type="text/javascript">
-    <% @messages.each do |message| %>
-        $("#<%= message.id %>").click(function() {
-            $.get("<%= edit_message_path(message.id) %>", function(result) {
-                console.log(result);
+    <% if @messages.present? %>
+        <% @messages.each do |message| %>
+            $("#<%= message.id %>").click(function() {
+                $.get("<%= edit_message_path(message.id) %>", function(result) {
+                    console.log(result);
 
-                if (result) {
-                    alert(result);
-                }
-                else {
-                    $("#list_group_<%= message.id %>").removeClass('list-group-item-danger').addClass('active');
-                    $("#list_group_<%= message.id %>").children().remove();
-                }
+                    if (result) {
+                        alert(result);
+                    } else {
+                        $("#list_group_<%= message.id %>").removeClass('list-group-item-danger').addClass('active');
+                        $("#list_group_<%= message.id %>").children().remove();
+                    }
+                });
             });
-        });
+        <% end %>
     <% end %>
 </script>
