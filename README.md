@@ -44,6 +44,9 @@ Liệt kê các **yêu cầu nâng cao** đã thực hiện:
 * [ ] Chức năng 2
 
 ## Demo
+Sử dụng tài khoản: vuongngockim@gmail.com, thiduclinh@gmail.com, huynhhoannhi@gmail.com, banhvihung@gmail.com
+password: vuongngockim
+để kiểm tra
 
 Link ảnh GIF demo ứng dụng:
 1. Đăng ký tài khoản bằng email, password, và tên, Đăng nhập bằng email và password, đăng xuất
