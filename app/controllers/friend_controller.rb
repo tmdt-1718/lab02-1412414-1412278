@@ -4,8 +4,21 @@ class FriendController < ApplicationController
   end
 
   def new
-    @list = User.all
-     @friendlist = Friend.joins('Left join users on users.id = friends.friend_id').select('friends.friend_id, users.first_name,users.last_name,users.email').where(:friends => {:user_id => session[:id_current_user]})
+    users = User.all
+     friendlist = Friend.joins('Left join users on users.id = friends.friend_id').select('friends.friend_id').where(:friends => {:user_id => session[:id_current_user]})
+
+     @list=[]
+     users.each do |user|
+       i = 0
+       friendlist.each do|friend|
+         if user.id == friend.friend_id
+           i = 1
+         end
+       end
+       if i == 0
+         @list.push(user)
+       end
+     end
   end
 
   def create
