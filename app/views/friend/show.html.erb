@@ -4,7 +4,7 @@
     <h2> Friend List </h2>
   </a>
   <% @friendlist.each do |friends|%>
-  <a class="list-group-item list-group-item-active"><%= friends.first_name%> <%= friends.last_name%>
+  <a class="list-group-item list-group-item-active"> <%= friends.friend_id %> <%= friends.first_name%> <%= friends.last_name%>
   </a>
   <%end%>
 </div>
