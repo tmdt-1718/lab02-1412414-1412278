@@ -26,6 +26,7 @@ Yêu cầu **bắt buộc**
 * [x] Mỗi người dùng chỉ có thể đọc tin nhắn 1 lần duy nhất. (**1412414**)
 * [x] Người dùng chỉ có thể đọc tin nhắn khi họ nằm trong danh sách người nhận. (**142278_1412414**)
 
+
 Yêu cầu **không bắt buộc**:
 * [x] Người dùng có thể gửi hình ảnh đính kèm theo thông điệp. (**1412414**)
 * [x] Người dùng có thể gửi tin nhắn đến nhiều người dùng cùng lúc. (**1412414**)
