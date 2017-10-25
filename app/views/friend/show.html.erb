@@ -1,4 +1,9 @@
 <div class="container">
+  <% if flash[:error_add_friend] %>
+  <div class="alert alert-danger">
+  <strong>Error</strong> <%= flash[:error_add_friend] %>
+</div>
+<%end%>
     <a href="<%=new_friend_path%>" type = "button" class="btn btn-info"> Add friend </a>
 <div class="list-group">
 

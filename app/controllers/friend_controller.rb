@@ -27,9 +27,10 @@ class FriendController < ApplicationController
 
 
     if @friend.save && @friend2.save
-      render json: nil
+      redirect_to friend_path(session[:id_current_user])
     else
-    render json: "There has been an error occured"
+    flash[:error_add_friend] = "There has been an error occured"
+    redirect_to friend_path(session[:id_current_user])
     end
   end
 
