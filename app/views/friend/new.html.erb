@@ -9,7 +9,7 @@
       <% if user.id == session["id_current_user"]%>
       <% else %>
         <% @friendlist.each do |friend| %>
-          <% if friend.friend_id == user.friend_id %>
+          <% if friend.friend_id == user.id %>
           <%else%>
             <a class="list-group-item list-group-item-active">
               <%= user.first_name %>
@@ -24,6 +24,7 @@
       <%end%>
     <%end%>
   </div>
+</div>
   <script type="text/javascript">
     <% @list.each do |user| %>
     <% if user.id == session["id_current_user"]%>
