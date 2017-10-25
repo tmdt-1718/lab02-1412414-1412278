@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
 	layout "signup_layout"
-	
+
 	before_action :authenticate, only: [:new]
 
 	def new
 	end
+
 
 	def create
 		user = User.find_by(user_email_params)
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
 	end
 
 	private
-	def user_password_params	
+	def user_password_params
 		params.require(:user).permit(:password)
 	end
 
