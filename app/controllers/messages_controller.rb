@@ -9,12 +9,14 @@ class MessagesController < ApplicationController
 		  format.js
 		end
 	end
-	def Sent
-		messages = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:user_id => session[:id_current_user]}).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
-	end
+	def sent
+		@messages = Message.joins('Left join users on users.id = messages.receiver_id').select('messages.*, users.first_name, users.last_name').where(:messages => {:user_id => session[:id_current_user]}).order(updated_at: :desc)
+
+
+			end
 	def new
-		@friends = Friend.joins("left join users on friends.friend_id = users.id").select('friends.user_id, friends.friend_id, users.first_name, users.last_name').where(:friends => {:user_id => session[:id_current_user]})
-	end
+		@messages = Message.joins(:user).select('messages.*, users.first_name, users.last_name').where(:messages => {:receiver_id => session[:id_current_user]}).order(created_at: :desc)
+			end
 
 	def create
 		error = 0
@@ -57,7 +59,7 @@ class MessagesController < ApplicationController
 	end
 
 	def edit
-		result = Message.where(id: params["id"]).update_all(status: 1)
+		result = Message.where(id: params["id"]).update_all(status: 1,updated_at: Time.current)
 
 		if result == 1
 			render json: nil

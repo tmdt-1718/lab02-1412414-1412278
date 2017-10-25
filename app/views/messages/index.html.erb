@@ -13,7 +13,7 @@
 	<div class="btn-group btn-group-justified">
 	  <a href="<%= new_message_path %>" class="btn btn-primary">Create new message</a>
 	  <a href="<%= friend_path(session["id_current_user"]) %>" class="btn btn-primary">List of friends</a>
-	  <a href="#" class="btn btn-primary">List of sent messages</a>
+	  <a href="<%= messages_sent_path(session["id_current_user"]) %>" class="btn btn-primary">List of sent messages</a>
 	</div>
     <h2>List of messages</h2>
     <% if @messages.present? %>

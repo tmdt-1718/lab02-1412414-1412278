@@ -24,7 +24,8 @@ Yêu cầu **bắt buộc**
 * [x] Nhấn nút "tạo tin nhắn" sẽ chuyển sang giao diện cho phép người dùng gửi tin nhắn cho người dùng trong danh sách bạn bè. Người gửi phải nằm trong danh sách bạn bè và cho phép người dùng chọn qua dropdown. (**1412414**)
 * [x] Nhấn "xem tin đã gửi" sẽ chuyển sang giao diện hiển thị danh sách tin nhắn đã gửi. Mỗi tin nhắn cần hiện thời gian người nhận đã đọc. (**1412278**)
 * [x] Mỗi người dùng chỉ có thể đọc tin nhắn 1 lần duy nhất. (**1412414**)
-* [x] Người dùng chỉ có thể đọc tin nhắn khi họ nằm trong danh sách người nhận. (**1412278_1412414**)
+* [x] Người dùng chỉ có thể đọc tin nhắn khi họ nằm trong danh sách người nhận. (**142278_1412414**)
+
 
 Yêu cầu **không bắt buộc**:
 * [x] Người dùng có thể gửi hình ảnh đính kèm theo thông điệp. (**1412414**)
