@@ -6,7 +6,7 @@ Thành viên:
 * [x] **1412278** **Phan Khánh Lâm** (tên tài khoản github: **1412278**)
 * [x] **1412414** **Vương Thiên Phú** (tên tài khoản github: **1412414**)
 
-URL: **URL hosting của bài tập**
+URL: **lab02phulam.herokuapp.com**
 
 ## Yêu cầu
 
